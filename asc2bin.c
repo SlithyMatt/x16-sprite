@@ -57,12 +57,16 @@ void main(int argc, char **argv) {
          if (idata[0] != '#') {
             i = 0;
             while (idata[i] >= ' ') {
-               nibble = getNibble(idata[i]);
-               odata = nibble << 4;
-               nibble = getNibble(idata[i+1]);
-               odata = odata | nibble;
-               fwrite(&odata,1,1,ofp);
-               i += 2;
+               if (idata[i] == ' ') {
+                  i++;
+               } else {
+                  nibble = getNibble(idata[i]);
+                  odata = nibble << 4;
+                  nibble = getNibble(idata[i+1]);
+                  odata = odata | nibble;
+                  fwrite(&odata,1,1,ofp);
+                  i += 2;
+               }
             }
          }
       }
