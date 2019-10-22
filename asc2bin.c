@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-char getNibble(char ascii) {
-   char nibble = 0;
-   if (ascii >= '0' || ascii <= '9') {
-      nibble = ascii - '0';
+uint8_t getNibble(char ascii) {
+   uint8_t nibble = 0;
+   if (ascii >= '0' && ascii <= '9') {
+      nibble = (uint8_t)(ascii - '0');
    } else if (toupper(ascii) >= 'A' || toupper(ascii) <= 'F') {
-      nibble = toupper(ascii) - 'A' + 0xA;
+      nibble = (uint8_t)(toupper(ascii) - 'A') + 0xA;
    }
 
    return nibble;
@@ -22,7 +22,7 @@ void main(int argc, char **argv) {
    char idata[258]; // Max 256 ASCII characters + end of line and null terminator
    uint8_t odata;
    int i;
-   char nibble;
+   uint8_t nibble;
 
    if (argc < 3) {
       printf("Usage: %s [source ASCII file] [converted binary file] [default load address]\n", argv[0]);
@@ -56,7 +56,7 @@ void main(int argc, char **argv) {
       if (fgets(idata, 256, ifp) != NULL) {
          if (idata[0] != '#') {
             i = 0;
-            while (idata[i] >= ' ') {
+            while ((idata[i] >= ' ') && (idata[i] != '#')) {
                if (idata[i] == ' ') {
                   i++;
                } else {
