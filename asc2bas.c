@@ -24,7 +24,7 @@ void main(int argc, char **argv) {
    int address;
    int bank;
    int offset;
-   char idata[258]; // Max 256 ASCII characters + end of line and null terminator
+   char idata[1003]; // Max 1000 ASCII characters + end of line and null terminator
    uint8_t odata;
    int i;
    uint8_t nibble;
@@ -61,7 +61,7 @@ void main(int argc, char **argv) {
 
    iline = 0;
    while (!feof(ifp)) {
-      if (fgets(idata, 256, ifp) != NULL) {
+      if (fgets(idata, 1001, ifp) != NULL) {
          iline++;
          if (idata[0] != '#') {
             if (bank > MAX_BANK) {
