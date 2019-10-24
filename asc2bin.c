@@ -19,7 +19,7 @@ void main(int argc, char **argv) {
    FILE *ofp;
 
    int address;
-   char idata[258]; // Max 256 ASCII characters + end of line and null terminator
+   char idata[1003]; // Max 1000 ASCII characters + end of line and null terminator
    uint8_t odata;
    int i;
    uint8_t nibble;
@@ -53,7 +53,7 @@ void main(int argc, char **argv) {
    fwrite(&odata,1,1,ofp);
 
    while (!feof(ifp)) {
-      if (fgets(idata, 256, ifp) != NULL) {
+      if (fgets(idata, 1001, ifp) != NULL) {
          if (idata[0] != '#') {
             i = 0;
             while ((idata[i] >= ' ') && (idata[i] != '#')) {
